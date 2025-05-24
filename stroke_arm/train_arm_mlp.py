@@ -52,7 +52,7 @@ def extract_arm_features(landmarks, hand_directions):
     hand_dir = np.mean(hand_directions) if hand_directions else 0.0
     return [angle_diff, depth_diff, height_diff, hand_dir]
 
-# 2초간 정상 유지 판단을 최대 10초 동안 2회 시도
+# 1초간 정상 유지 판단을 최대 10초 동안 2회 시도
 def wait_for_stable_pose_with_retry(cap, pose, hands, model, scaler, max_attempts=2, max_duration=10.0, interval=0.1, require_normal_count=10):
     for attempt in range(max_attempts):
         speak("양팔을 들어주세요")
@@ -118,7 +118,7 @@ def wait_for_stable_pose_with_retry(cap, pose, hands, model, scaler, max_attempt
     speak("측정에 실패하였습니다. 프로그램을 종료합니다.")
     return False
 
-# 5초간 측정
+# 5초간 50프레임 측정
 
 def perform_measurement(cap, pose, hands, model, scaler, duration=5.0, interval=0.1):
     results = []
